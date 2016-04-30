@@ -1,0 +1,22 @@
+{
+  "name": "mini-progressbar",
+  "authors": [
+    "seph <sephvelut@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-import": "*",
+    "polymer": "^1.4.0",
+    "jquery-import-seph": "*"
+  }
+}

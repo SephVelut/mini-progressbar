@@ -1,0 +1,74 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../jquery-import-seph/jquery.html">
+<link rel="import" href="../bootstrap-import/bootstrap.html">
+<link rel="import" href="../bootstrap-import/bootstrap-progressbar.html">
+
+<link rel="stylesheet" href="umega.css">
+
+<dom-module id="mini-progressbar">
+    <template>
+        <div class="block clearfix mb-5"><span class="pull-left fs-12">{{label}}</span><span class="pull-right label label-outline label-danger">{{progress}}</span></div>
+        <div id="progress-bar" class="progress">
+            <div role="progressbar" data-transitiongoal="{{progress}}" class="progress-bar progress-bar-warning" aria-valuenow="{{progress}}"></div>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'mini-progressbar',
+
+            properties: {
+                label: {
+                    type: String,
+                    value: "label"
+                },
+
+                progress: {
+                    type: String,
+                    value: "0",
+                    observer: '_progressChanged'
+                },
+
+                size: {
+                    type: String,
+                    notify: true
+                }
+            },
+
+            attached: function () {
+                this.async(function () {
+                    switch (this.size) {
+                    case "tiny":
+                        var height = "3px";
+                        break;
+                    case "small":
+                        var height = "10px";
+                        break;
+                    case "medium":
+                        var height = "20px";
+                        break;
+                    case "large":
+                        var height = "40px";
+                        break;
+                    default:
+                        var height = "20px";
+                        break;
+                    }
+
+                    this.$['progress-bar'].style.height = height;
+                    this.$['progress-bar'].style.marginBottom = height;
+                });
+            },
+
+            _progressChanged: function (newValue, oldValue) {
+                var el = Polymer.dom(this.$['progress-bar']).firstElementChild
+
+                el.setAttribute('data-transitiongoal', this.progress)
+                el.setAttribute('aria-valuenow', this.progress)
+
+                $(el).progressbar();
+            }
+        });
+    </script>
+</dom-module>
